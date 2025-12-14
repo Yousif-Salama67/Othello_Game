@@ -93,4 +93,54 @@ class Othello_Game:
 
     def game_over(self, board):
         return not (self.get_valid_moves("B", board) or self.get_valid_moves("W", board))
+# =========== Shows Board, Score, And Valid Moves Each Turn ===========
+    def play_game(self, game_mode = "1"):
+        board = self.board
+        while not self.game_over(board):
+            self.display_board(board)
+            self.show_score(board)
+
+            if self.current_player == "B" or game_mode == "1":
+                valid_moves = self.get_valid_moves(self.current_player, board)
+                if not valid_moves:
+                    print(f"No Valid Moves For {self.current_player}. Turn Skipped.")
+                    self.switch_player()
+                    continue
+                print(f"Player {self.current_player}'s Turn")
+                print("Valid Moves:", [(r+1, c+1) for r, c in valid_moves])
+
+                while True:
+                    try:
+                        r = int(input("Row (1-8): ")) - 1
+                        c = int(input("Col (1-8): ")) - 1
+                        if (r, c) in valid_moves:
+                            break
+                        else:
+                            print("Invalid Move, Choose From The List Above.")
+                    except:
+                        print("Numbers Only")
+
+                board = self.make_move(board, (r, c), self.current_player)
+
+            else:
+                print("White Is Thinking...")
+                move = self.best_ai_move(board, depth=5)
+                if move is None:
+                    print("No valid moves for AI. Turn skipped.")
+                else:
+                    print(f"AI Chooses Move: {(move[0]+1, move[1]+1)}")
+                    board = self.make_move(board, move, "W")
+
+            self.board = board
+            self.switch_player()
+        self.display_board(board)
+        b, w = self.score(board)
+        print("\n===== GAME OVER =====")
+        print(f"Final Score → Black: {b} | White: {w}")
+        if w > b:
+            print("White Wins!")
+        elif b > w:
+            print("You Win!")
+        else:
+            print("Draw!") 
 
