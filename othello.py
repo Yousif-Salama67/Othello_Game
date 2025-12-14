@@ -94,6 +94,53 @@ class Othello_Game:
     def game_over(self, board):
         return not (self.get_valid_moves("B", board) or self.get_valid_moves("W", board))
     
+
+    # =================================================================
+    """"
+        == Minimax Algorithm To Find the Best Move For The AI ==
+          - maximizing: True If AI turn, False If Human Turn
+          - depth: How Many Moves Ahead The AI Should Simulate
+
+    """
+    # =================================================================
+    def minimax(self, board, depth, maximizing):
+        if depth == 0 or self.game_over(board):
+            return self.evaluate(board)
+
+        if maximizing:
+            max_eval = -float("inf")
+            moves = self.get_valid_moves("W", board)
+            if not moves:
+                return self.minimax(board, depth - 1, False)
+            for move in moves:
+                new_board = self.make_move(board, move, "W")
+                eval = self.minimax(new_board, depth - 1, False)
+                max_eval = max(max_eval, eval)
+            return max_eval
+        else:
+            min_eval = float("inf")
+            moves = self.get_valid_moves("B", board)
+            if not moves:
+                return self.minimax(board, depth - 1, True)
+            for move in moves:
+                new_board = self.make_move(board, move, "B")
+                eval = self.minimax(new_board, depth - 1, True)
+                min_eval = min(min_eval, eval)
+            return min_eval
+
+    # =========== Determine The Best Move For The AI Using The Minimax Algorithm. ===========
+    def best_ai_move(self, board, depth):
+        best_score = -float("inf")
+        best_move = None
+        for move in self.get_valid_moves("W", board):
+            new_board = self.make_move(board, move, "W")
+            score = self.minimax(new_board, depth - 1, False)
+            if score > best_score:
+                best_score = score
+                best_move = move
+        return best_move
+
+    
 # =========== Shows Board, Score, And Valid Moves Each Turn ===========
     def play_game(self, game_mode = "1"):
         board = self.board
