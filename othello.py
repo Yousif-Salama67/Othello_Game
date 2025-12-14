@@ -93,6 +93,7 @@ class Othello_Game:
 
     def game_over(self, board):
         return not (self.get_valid_moves("B", board) or self.get_valid_moves("W", board))
+    
 # =========== Shows Board, Score, And Valid Moves Each Turn ===========
     def play_game(self, game_mode = "1"):
         board = self.board
