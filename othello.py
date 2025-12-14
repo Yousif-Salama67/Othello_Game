@@ -99,7 +99,7 @@ class Othello_Game:
     """"
         == Minimax Algorithm To Find the Best Move For The AI ==
           - maximizing: True If AI turn, False If Human Turn
-          - depth: How Many Moves Ahead The AI Should Simulate
+          - depth: How Many Moves Ahead The AI Should Simulate 
 
     """
     # =================================================================
