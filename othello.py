@@ -2,7 +2,7 @@ import copy
 
 class Othello_Game:
 
-# =========== Intialization The Board And Starting Positions ===========
+    # =========== Intialization The Board And Starting Positions ===========
     def _init_(self):
         self.size = 8
         self.board = [[" " for _ in range(self.size)] for _ in range(self.size)]
@@ -13,20 +13,7 @@ class Othello_Game:
 
         self.current_player = "B"
 
-#------------------------------------------------------------------------------------------------
-
-     # =========== Switch The Current Player ===========
-    def switch_player(self):
-        self.current_player = "W" if self.current_player == "B" else "B"
-
-#-----------------------------------------------------------------------------------------------
-
-    # =========== Check If The Move Is Valid ===========
-    def is_valid_move(self, player, row, col, board):
-        if board[row][col] != " ":
-            return False
-
- # =========== Display The Current State Of The Board ===========
+    # =========== Display The Current State Of The Board ===========
     def display_board(self, board):
         print("\n      == OTHELLO BOARD ==")
         print("   ", end="")
@@ -43,18 +30,19 @@ class Othello_Game:
             if r < self.size - 1:
                 print("  " + "---+" * (self.size - 1) + "---")
         print()
-#------------------------------------------------------------------------------------------------
 
      # =========== Switch The Current Player ===========
     def switch_player(self):
         self.current_player = "W" if self.current_player == "B" else "B"
 
-#-----------------------------------------------------------------------------------------------
-
     # =========== Check If The Move Is Valid ===========
     def is_valid_move(self, player, row, col, board):
         if board[row][col] != " ":
             return False
+        opponent = "W" if player == "B" else "B"
+        directions = [(-1,0),(1,0),(0,-1),(0,1),(-1,-1),(1,-1),(-1,1),(1,1)]
+        for dr, dc in directions:
+            r, c = row + dr, col + dc
             found_opponent = False
             while 0 <= r < self.size and 0 <= c < self.size:
                 if board[r][c] == opponent:
@@ -78,9 +66,7 @@ class Othello_Game:
                     moves.append((r, c))
         return moves
 
-#==================================================================================================
-
-  # =========== Execute a move for the given player on the board and flip opponent pieces ===========
+    # =========== Execute a move for the given player on the board and flip opponent pieces ===========
     def make_move(self, board, action, player):
         new_board = [row.copy() for row in board]
         row, col = action
@@ -102,9 +88,6 @@ class Othello_Game:
                 else:
                     break
         return new_board
-
-#-------------------------------------------------------------------------------------------------
-
     
 #=======================================================================================
 
