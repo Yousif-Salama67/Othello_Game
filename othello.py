@@ -1,5 +1,4 @@
-
-    # =========== Intialization The Board And Starting Positions ===========
+# =========== Intialization The Board And Starting Positions ===========
     def _init_(self):
         self.size = 8
         self.board = [[" " for _ in range(self.size)] for _ in range(self.size)]
@@ -10,15 +9,15 @@
 
         self.current_player = "B"
 
-#-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
 
      # =========== Switch The Current Player ===========
     def switch_player(self):
         self.current_player = "W" if self.current_player == "B" else "B"
 
-#----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
 
-        # =========== Check If The Move Is Valid ===========
+    # =========== Check If The Move Is Valid ===========
     def is_valid_move(self, player, row, col, board):
         if board[row][col] != " ":
             return False
@@ -40,7 +39,7 @@
                     break
         return False
 
-#------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------
 
     # ===========  Return A list Of All Valid Moves For A Player Represented As A Tuple ===========
     def get_valid_moves(self, player, board):
