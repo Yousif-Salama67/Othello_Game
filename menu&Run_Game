@@ -1,0 +1,14 @@
+print("Welcome To Othello!")
+print("1 - Player vs Player")
+print("2 - Player vs AI")
+print("Choose Game Mode:")
+
+while True:
+    game_mode = input("Enter 1 or 2: ")
+    if game_mode in ["1", "2"]:
+        break
+    else:
+        print("Invalid Choice! Please enter 1 or 2.")
+
+game = Othello_Game()      
+game.play_game(game_mode) 
