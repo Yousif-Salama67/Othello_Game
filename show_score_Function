@@ -1,4 +1,0 @@
- def show_score(self, board):
-        b, w = self.score(board)
-        print(f"Score → Black (B): {b} | White (W): {w}")
-
