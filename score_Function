@@ -1,0 +1,4 @@
+   def score(self, board):
+        black = sum(row.count("B") for row in board)
+        white = sum(row.count("W") for row in board)
+        return black, white
