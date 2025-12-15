@@ -1,3 +1,0 @@
-    def evaluate(self, board):
-        b, w = self.score(board)
-        return w - b
