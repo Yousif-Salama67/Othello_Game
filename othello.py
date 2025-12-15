@@ -95,6 +95,22 @@ class Othello_Game:
         return not (self.get_valid_moves("B", board) or self.get_valid_moves("W", board))
     
 
+# ===========  Count The Number of Black And White Pieces On The Board ===========
+    def score(self, board):
+        black = sum(row.count("B") for row in board)
+        white = sum(row.count("W") for row in board)
+        return black, white
+
+    # =========== Display The Current Svore ===========
+    def show_score(self, board):
+        b, w = self.score(board)
+        print(f"Score → Black (B): {b} | White (W): {w}")
+
+    # =========== Evaluate the board for the AI ===========
+    def evaluate(self, board):
+        b, w = self.score(board)
+        return w - b
+    
     # =================================================================
     """"
         == Minimax Algorithm To Find the Best Move For The AI ==
@@ -191,5 +207,24 @@ class Othello_Game:
             print("You Win!")
         else:
             print("Draw!") 
+
+# =========== Menu Of The Game ===========
+
+print("Welcome To Othello!")
+print("1 - Player vs Player")
+print("2 - Player vs AI")
+print("Choose Game Mode:")
+
+while True:
+    game_mode = input("Enter 1 or 2: ")
+    if game_mode in ["1", "2"]:
+        break
+    else:
+        print("Invalid Choice!. Enter 1 or 2.")
+
+# =========== Run The Game ===========
+
+game = Othello_Game()
+game.play_game(game_mode)
 
  
